@@ -1,5 +1,5 @@
 # Project 8 - SQL Library Manager
-Treehouse Project 8 - SQL Library App
+In this project, we had to build a web application that includes pages to list, add, update, and delete books. We were given HTML designs and an existing SQLite database, and then had to implement a dynamic website using JavaScript, Node.js, Express, Pug, SQLite and the SQL ORM Sequelize.
 
 ## Usage
 * Clone the repo
