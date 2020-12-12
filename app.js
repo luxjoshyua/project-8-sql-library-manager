@@ -1,22 +1,19 @@
-var createError = require("http-errors");
+const createError = require("http-errors");
 // import the sequelize instance
 const { sequelize } = require("./models");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-
-var app = express();
+const app = express();
 
 // Authenticate connection
 (async () => {
-  /* asynchronously connect to the database,
-log out a message indicating a connection has/hasn't been established
-*/
+  /* asynchronously connect to the database, log out a message indicating a connection has/hasn't been established
+   */
   try {
     await sequelize.authenticate();
     console.log("Successfully connected to the database");
@@ -45,15 +42,17 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+/**
+ * Global Error Handler
+ */
+// catch 404 Error Handler
+app.use((req, res, next) => {
+  const err = new Error();
+  res.status(404);
+  err.message = "Page cannot be found";
+  res.render("page-not-found", { title: "Page Not Found" });
+  // pass the error up
+  next(err);
 });
 
 module.exports = app;
