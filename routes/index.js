@@ -23,8 +23,21 @@ function asyncHandler(cb) {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    // res.redirect("/books");
-    res.redirect("/");
+    res.redirect("/books");
+  })
+);
+
+// GET /books, show the full list of books
+router.get(
+  "/books",
+  asyncHandler(async (req, res) => {
+    // retrieve all books
+    // const books = await Book.findAll({ order: [["createdAt", "DESC"]] });
+    const books = await Book.findAll();
+    res.render("index", {
+      books: books,
+      title: "My collected books!",
+    });
   })
 );
 

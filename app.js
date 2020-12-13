@@ -16,11 +16,11 @@ const app = express();
    */
   try {
     await sequelize.authenticate();
-    console.log("Successfully connected to the database");
+    console.log(`Successfully connected to the database`);
     // sync the model with the database
     await sequelize.sync();
   } catch (error) {
-    console.error("Unable to connect to the database", error);
+    console.error(`Unable to connect to the database, ${error}`);
   }
 })();
 
@@ -37,11 +37,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-// catch 404 Error Handler
+/**
+ * 404 Error Handler
+ */
 app.use((req, res, next) => {
   const err = new Error();
   res.status(404);
-  err.message = "Page cannot be found";
+  err.message = `Page cannot be found`;
   // res.render("page-not-found", { title: "Page Not Found" });
   res.render("page-not-found", { err });
   // pass the error up
@@ -51,5 +53,11 @@ app.use((req, res, next) => {
 /**
  * Global Error Handler
  */
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  err.message = err.message || `Something broke, we're working on it!`;
+  console.log(`Error is: ${err.status}, ${err.message}`);
+  res.render("error", { err });
+});
 
 module.exports = app;
