@@ -37,22 +37,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-/**
- * Global Error Handler
- */
 // catch 404 Error Handler
 app.use((req, res, next) => {
   const err = new Error();
   res.status(404);
   err.message = "Page cannot be found";
-  res.render("page-not-found", { title: "Page Not Found" });
+  // res.render("page-not-found", { title: "Page Not Found" });
+  res.render("page-not-found", { err });
   // pass the error up
   next(err);
 });
+
+/**
+ * Global Error Handler
+ */
 
 module.exports = app;
