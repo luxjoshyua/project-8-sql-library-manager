@@ -1,15 +1,25 @@
 extends layout
 
 block content
-  h1= "Books"
-  a.button(href="/new-book") Create New Book
+  
+  h1.heading= "Books"
+  a.button(href=`/books/new`) Create New Book
   //- title, author, genre, year
   table.table
-    tr 
-      th Title
-      th Author
-      th Genre
-      th Year
-    tbody 
+    tr.heading
+      th.title Title
+      th.sm Author
+      th.sm Genre
+      th.sm Year
+    tbody.copy
+      each book in books
+        tr
+          td.title 
+            a(href=`/books/${book.id}`)= book.title
+          td.sm #{book.author}
+          td.sm #{book.genre}
+          td.sm #{book.year}
+
+
 
 

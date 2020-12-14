@@ -13,6 +13,16 @@ a:hover {
   opacity: 0.8;
 }
 
+.wrapper {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+h1.heading {
+  margin-bottom: 20px;
+}
+
 .button {
   color: white;
   background: #019875;
@@ -24,5 +34,34 @@ a:hover {
 }
 
 .table {
-  padding-top: 20px;
+  padding-top: 40px;
+  width: 100%;
+}
+
+.heading {
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.copy tr td {
+  font-weight: 400;
+  text-align: left;
+  line-height: 2rem;
+  /* padding-right: 40px; */
+}
+
+.title {
+  width: 40%;
+  padding-right: 40px;
+}
+
+.sm {
+  width: 20%;
 }
