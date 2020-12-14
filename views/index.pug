@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= "Books"
+  a.button(href="/new-book") Create New Book
+  //- title, author, genre, year
+  table.table
+    tr 
+      th Title
+      th Author
+      th Genre
+      th Year
+    tbody 
+
+

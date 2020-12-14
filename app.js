@@ -1,16 +1,31 @@
-const createError = require("http-errors");
+// const createError = require("http-errors");
 // import the sequelize instance
 const { sequelize } = require("./models");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const indexRouter = require("./routes/index");
-// const usersRouter = require("./routes/users");
+
+// import Sequelize and the routes
+const routes = require("./routes/index");
+const books = require("./routes/books");
 
 const app = express();
 
-// Authenticate connection
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/", routes);
+app.use("/books", books);
+
+// Authenticate database connection
 (async () => {
   /* asynchronously connect to the database, log out a message indicating a connection has/hasn't been established
    */
@@ -23,19 +38,6 @@ const app = express();
     console.error(`Unable to connect to the database, ${error}`);
   }
 })();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/", indexRouter);
-// app.use("/users", usersRouter);
 
 // 404 Error Handler
 app.use((req, res, next) => {
