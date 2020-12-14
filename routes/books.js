@@ -124,5 +124,19 @@ router.post(
 );
 
 // POST /books/:id/delete, deletes a book from the database
+router.post(
+  "/:id/delete",
+  asyncHandler(async (req, res) => {
+    // find the book to destroy
+    const book = await Book.findByPk(req.params.id);
+    if (book) {
+      await book.destroy();
+      res.redirect("/");
+    } else {
+      res.sendStatus(404);
+      res.render("page-not-found");
+    }
+  })
+);
 
 module.exports = router;
