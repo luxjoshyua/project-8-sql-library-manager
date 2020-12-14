@@ -41,4 +41,14 @@ router.get(
   })
 );
 
+// GET /books/new, shows the create new book form
+router.get(
+  "/books/new",
+  asyncHandler(async (req, res) => {
+    res.render("new-book", {
+      title: "New Book",
+    });
+  })
+);
+
 module.exports = router;

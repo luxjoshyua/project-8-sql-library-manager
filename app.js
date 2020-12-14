@@ -37,9 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-/**
- * 404 Error Handler
- */
+// 404 Error Handler
 app.use((req, res, next) => {
   const err = new Error();
   res.status(404);
@@ -50,9 +48,7 @@ app.use((req, res, next) => {
   next(err);
 });
 
-/**
- * Global Error Handler
- */
+// Global Error Handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   err.message = err.message || `Something broke, we're working on it!`;
