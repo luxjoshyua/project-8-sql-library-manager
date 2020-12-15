@@ -21,7 +21,7 @@ function asyncHandler(cb) {
 
 // GET /books listing, show the full list of books
 router.get(
-  "/books",
+  "/",
   asyncHandler(async (req, res) => {
     // retrieve all books
     // const books = await Book.findAll({ order: [["createdAt", "DESC"]] });
@@ -35,7 +35,7 @@ router.get(
 
 // GET /books/new, create a new book form
 router.get(
-  "/books/new",
+  "/new",
   asyncHandler(async (req, res) => {
     res.render("new-book", {
       // populate this object
@@ -47,7 +47,7 @@ router.get(
 
 // POST /books/new, posts a newly created book to the database
 router.post(
-  "/books/new",
+  "/new",
   asyncHandler(async (req, res) => {
     let book;
     try {
@@ -76,7 +76,7 @@ router.post(
 
 // GET /books/:id, shows book detail form
 router.get(
-  "books/:id",
+  "/:id",
   asyncHandler(async (req, res) => {
     // find the book by using the requested parameter router id
     const book = await Book.findByPk(req.params.id);
@@ -94,7 +94,7 @@ router.get(
 
 // POST /books/:id, updates book info in the database
 router.post(
-  "books/:id",
+  "/:id",
   asyncHandler(async (req, res) => {
     // initialise book variable that awaits the search result
     let book;
@@ -125,7 +125,7 @@ router.post(
 
 // POST /books/:id/delete, deletes a book from the database
 router.post(
-  "books/:id/delete",
+  "/:id/delete",
   asyncHandler(async (req, res) => {
     // find the book to destroy
     const book = await Book.findByPk(req.params.id);

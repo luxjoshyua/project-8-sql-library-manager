@@ -2,4 +2,35 @@ extends layout
 
 block content
 
-  h1.heading= "My update book template!"
+  h1.heading= "Update Book Page"
+  h2.subhead= "Here is where you can edit the book entry"
+  form
+  form(action=`/books/${book.id}`, method="post")
+    //- title
+    div.form-row
+      label(for="title") Title
+      input(type="text", name="title", value=book.title)
+    //- author
+    div.form-row
+      label(for="author") Author
+      input(type="text", name="author", value=book.author)
+    //- genre
+    div.form-row
+      label(for="genre") Genre
+      input(type="text", name="genre", value=book.genre)
+    //- year
+    div.form-row
+      label(for="year") Year
+      input(type="text", name="year", value=book.year)
+    //- update book field
+    div.form-row
+      input.btn(type="submit", value="Update Book")
+
+      
+    form(action=`/books/${book.id}/delete`, method="post", onsubmit="return confirm('Are you super sure you want to delete this book? This action cannot be undone.')")
+    //- cancel button
+    div.form-row
+      a.button(href="/") Cancel
+    //- delete book field
+    div.form-row
+      input.btn(type="submit", value="Delete Book")
