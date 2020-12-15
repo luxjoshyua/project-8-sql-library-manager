@@ -44,8 +44,8 @@ app.use((req, res, next) => {
   const err = new Error();
   res.status(404);
   err.message = `Page cannot be found`;
-  // res.render("page-not-found", { title: "Page Not Found" });
-  res.render("page-not-found", { err });
+  res.render("page-not-found", { title: "Page Not Found" });
+  // res.render("page-not-found", { err });
   // pass the error up
   next(err);
 });
