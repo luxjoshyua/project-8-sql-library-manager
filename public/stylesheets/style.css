@@ -31,6 +31,7 @@ h1.heading {
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
+  border: none;
 }
 
 .table {
@@ -41,6 +42,10 @@ h1.heading {
 .heading {
   padding-bottom: 10px;
   text-align: left;
+}
+
+.subhead {
+  padding-bottom: 30px;
 }
 
 tr {
@@ -54,7 +59,6 @@ tr {
   font-weight: 400;
   text-align: left;
   line-height: 2rem;
-  /* padding-right: 40px; */
 }
 
 .title {
@@ -64,4 +68,14 @@ tr {
 
 .sm {
   width: 20%;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+form label {
+  padding-right: 20px;
 }
