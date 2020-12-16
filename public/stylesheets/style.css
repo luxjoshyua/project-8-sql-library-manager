@@ -79,3 +79,7 @@ tr {
 form label {
   padding-right: 20px;
 }
+
+ul.form-error {
+  padding-bottom: 20px;
+}
