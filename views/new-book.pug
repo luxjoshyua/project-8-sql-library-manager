@@ -5,26 +5,29 @@ block content
   h1.heading= "New Book Page"
   h2.subhead= "Here is where you can enter a new book for the database"
 
-  form(action="/books/new", method="post")
+  form.new-book-form(action="/books/new", method="post")
     //- title
     div.form-row
       label(for="title") Title:
-      input(type="text", name="title", value=book.title)
+      input(type="text", name="title", id="title" value=book.title)
     //- author
     div.form-row
       label(for="author") Author:
-      input(type="text", name="author", value=book.author)
+      input(type="text", name="author", id="author" value=book.author)
     //- genre
     div.form-row
       label(for="genre") Genre:
-      input(type="genre", name="genre", value=book.genre)
+      input(type="genre", name="genre", id="genre" value=book.genre)
     //- year
     div.form-row
       label(for="year") Year:
-      input(type="year", name="year", value=book.year)
+      input(type="year", name="year", id="year" value=book.year)
     //- create new book button
     div.form-row
       input(type="submit", value="Create New Book") 
     //- cancel button
     div.form-row
       input.button(type="reset", value="Cancel")
+    //- back to home page
+    div.form-row
+      a.button(href="/") Back to home
