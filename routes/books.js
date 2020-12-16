@@ -26,10 +26,15 @@ router.get(
     // retrieve all books
     // const books = await Book.findAll({ order: [["createdAt", "DESC"]] });
     const books = await Book.findAll();
-    res.render("index", {
-      books: books,
-      title: "My collected library books!",
-    });
+    if (books) {
+      res.render("index", {
+        books: books,
+        title: "My collected library books!",
+      });
+    } else {
+      res.status(404);
+      res.render("page-not-found");
+    }
   })
 );
 
@@ -86,7 +91,8 @@ router.get(
         title: "Edit Book",
       });
     } else {
-      res.sendStatus(404);
+      // res.sendStatus(404);
+      res.status(404);
       res.render("page-not-found");
     }
   })
@@ -111,11 +117,12 @@ router.post(
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         book = await Book.build(req.body);
-        res.render("update-book", {
-          book: book,
-          errors: error.errors,
-          title: "Edit Book",
-        });
+        // res.render("update-book", {
+        //   book: book,
+        //   errors: error.errors,
+        //   title: "Edit Book",
+        // });
+        // res.render("form-error");
       } else {
         throw error;
       }
