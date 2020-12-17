@@ -74,4 +74,6 @@ app.use((err, req, res, next) => {
   }
 });
 
+console.log("Heroku app deploy test");
+
 module.exports = app;
