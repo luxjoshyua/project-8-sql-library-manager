@@ -10,26 +10,6 @@ block content
     li= "Name is required"
     li= "Please enter a valid year"
 
-  //- form
-  //-   //- title
-  //-   div.form-row
-  //-     label(for="title") Title:
-  //-     input(type="text", name="title", value=book.title)
-  //-   //- author
-  //-   div.form-row
-  //-     label(for="author") Author:
-  //-     input(type="text", name="author", value=book.author)
-  //-   //- genre
-  //-   div.form-row
-  //-     label(for="genre") Genre:
-  //-     input(type="genre", name="genre", value=book.genre)
-  //-   //- year
-  //-   div.form-row
-  //-     label(for="year") Year:
-  //-     input(type="year", name="year", value=book.year)
-  //-   //- back to home 
-  //-   div.form-row
-  //-     a.button(href="/") Home
   form.new-book-form(action="/books/new", method="post")
     //- title
     div.form-row
