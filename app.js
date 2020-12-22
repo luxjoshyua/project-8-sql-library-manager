@@ -60,6 +60,4 @@ app.use((err, req, res, next) => {
   res.render("error", { title: err.message });
 });
 
-// console.log("Heroku app deploy test");
-
 module.exports = app;
