@@ -1,4 +1,4 @@
-// const createError = require("http-errors");
+const createError = require("http-errors");
 // import the sequelize instance
 const { sequelize } = require("./models");
 const express = require("express");
@@ -41,39 +41,25 @@ app.use("/books", books);
 
 // 404 Error Handler
 app.use((req, res, next) => {
-  const err = new Error();
-  err.status === 404;
-  res.status(404);
-  console.log("404 error handler called");
-  err.message = `Page cannot be found`;
-  // res.render("page-not-found", { title: "Page Not Found" });
-  res.render("page-not-found", { err });
-  // pass the error up
-  // next(err);
+  next(createError(404, "Not Found"));
 });
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  if (err) {
-    console.log("Global error handler called");
-  }
+  // setup local error handlers
+  res.locals.message = err.message;
+  res.locals.error = err;
+
+  res.status(err.status || 500);
 
   if (err.status === 404) {
     res.status(404);
     res.render("page-not-found", { err });
-  } else {
-    console.log(
-      `Error status is ${err.status}, Error message is ${err.message}`
-    );
-    // set the error message to the given message, or specify a general default message
-    err.message = err.message || `Something broke, we're working on it!`;
-    // set response status to the given error status, or set it to 500 by default if no error is set
-    res.status(err.status || 500);
-    // render the error view, passing it the error object
-    res.render("error", { err });
   }
+
+  res.render("error", { title: err.message });
 });
 
-console.log("Heroku app deploy test");
+// console.log("Heroku app deploy test");
 
 module.exports = app;

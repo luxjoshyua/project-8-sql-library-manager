@@ -19,6 +19,13 @@ function asyncHandler(cb) {
   };
 }
 
+// Book doesn't exist error handler
+const errorHandler = (errStatus, msg) => {
+  const err = new Error(msg);
+  err.status = errStatus;
+  throw err;
+};
+
 // GET /books listing, show the full list of books
 router.get(
   "/",
@@ -33,7 +40,7 @@ router.get(
       });
     } else {
       res.status(404);
-      res.render("page-not-found");
+      throw error;
     }
   })
 );
@@ -66,7 +73,7 @@ router.post(
       // empty field handler
       if (error.name === "SequelizeValidationError") {
         book = await Book.build(req.body);
-        res.render("form-error", {
+        res.render("new-book", {
           book: book,
           errors: error.errors,
           title: "Error",
@@ -91,9 +98,10 @@ router.get(
         title: "Edit Book",
       });
     } else {
-      // res.sendStatus(404);
-      res.status(404);
-      res.render("page-not-found");
+      errorHandler(
+        404,
+        `There is no book in our database that matches that id`
+      );
     }
   })
 );
@@ -117,7 +125,7 @@ router.post(
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         book = await Book.build(req.body);
-        res.render("form-error", {
+        res.render("update-book", {
           book: book,
           errors: error.errors,
           title: "Error",

@@ -1,41 +1,13 @@
-extends layout
+if (errors)
+  h2.error Submission Error
+  ul.error
+    each error in errors
+      li
+        =error.message
 
-block content
 
-  h1.heading= "New Book"
-  h2.subhead= "Ooops!"
 
-  ul.form-error
-    li= "Author is required"
-    li= "Name is required"
-    li= "Please enter a valid year"
-
-  form.new-book-form(action="/books/new", method="post")
-    //- title
-    div.form-row
-      label(for="title") Title:
-      input(type="text", name="title", id="title" value=book.title)
-    //- author
-    div.form-row
-      label(for="author") Author:
-      input(type="text", name="author", id="author" value=book.author)
-    //- genre
-    div.form-row
-      label(for="genre") Genre:
-      input(type="genre", name="genre", id="genre" value=book.genre)
-    //- year
-    div.form-row
-      label(for="year") Year:
-      input(type="year", name="year", id="year" value=book.year)
-    //- create new book button
-    div.form-row
-      input(type="submit", value="Create New Book") 
-    //- cancel button
-    div.form-row
-      input.button(type="reset", value="Cancel")
-    //- back to home page
-    div.form-row
-      a.button(href="/") Back to home
+ 
     
   
   
