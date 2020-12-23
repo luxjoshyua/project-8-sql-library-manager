@@ -121,8 +121,6 @@ router.post(
         res.redirect("/");
       } else {
         res.sendStatus(404);
-        // res.sendStatus(400);
-        // res.redirect("/books/book.id");
       }
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
@@ -134,7 +132,6 @@ router.post(
         });
       } else {
         throw error;
-        // res.redirect("/");
       }
     }
   })
