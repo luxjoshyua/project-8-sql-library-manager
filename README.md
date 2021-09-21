@@ -3,8 +3,8 @@ In this project, we had to build a web application that includes pages to list, 
 
 ## Usage
 * Clone the repo
-* Install dependencies using $ npm install
-* Start the server using $ npm start
+* Install dependencies using `$ npm install`
+* Start the server using `$ npm start`
 * Navigate to the browser of choice and enter `http://localhost:3000/` to run the app locally
 
 ## Technologies 
